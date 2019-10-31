@@ -1,0 +1,11 @@
+@hostname = http://localhost:6000
+### Register User
+# @name Register
+POST {{hostname}}/api/users
+content-type: application/json
+
+{
+    "name": "Danil",
+    "email": "example@mail.ru",
+    "password": "test_pass"
+}

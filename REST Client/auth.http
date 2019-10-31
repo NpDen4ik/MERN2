@@ -1,0 +1,22 @@
+@hostname = http://localhost:6000
+
+### Authenticate user
+# @name GetToken
+POST {{hostname}}/api/auth
+content-type: application/json
+
+{
+	"email": "npden4ik@yandex.ru",
+	"password": "123456"
+}
+
+###
+
+### Check Acesss
+@authToken = {{GetToken.response.body.token}}
+# @name GetUser
+GET {{hostname}}/api/auth
+content-type: application/json
+x-auth-token: {{authToken}}
+
+###

@@ -9,6 +9,7 @@ const {
 
 const auth = require('../../middleware/auth');
 const User = require('../../models/User');
+const jwt = require('jsonwebtoken');
 
 // @route GET api/auth
 // @desc Test route
