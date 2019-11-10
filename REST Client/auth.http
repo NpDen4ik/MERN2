@@ -1,5 +1,5 @@
 @hostname = http://localhost:6000
-
+@authToken = {{GetToken.response.body.token}}
 ### Authenticate user
 # @name GetToken
 POST {{hostname}}/api/auth
@@ -13,7 +13,7 @@ content-type: application/json
 ###
 
 ### Check Acesss
-@authToken = {{GetToken.response.body.token}}
+
 # @name GetUser
 GET {{hostname}}/api/auth
 content-type: application/json

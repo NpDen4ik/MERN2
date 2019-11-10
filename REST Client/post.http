@@ -1,0 +1,66 @@
+@hostname = http://localhost:6000
+@authToken = {{GetToken.response.body.token}}
+### Authenticate user
+# @name GetToken
+POST {{hostname}}/api/auth
+content-type: application/json
+
+{
+	"email": "example@mail.ru",
+	"password": "test_pass"
+}
+
+###
+
+### Add new Post
+POST {{hostname}}/api/posts
+content-type: application/json
+x-auth-token: {{authToken}}
+
+{
+    "text": "new post"
+}
+
+### Get all posts
+GET {{hostname}}/api/posts
+content-type: application/json
+x-auth-token: {{authToken}}
+
+###
+
+### Get post by id
+@post_id =5dc7d6936fbd0d2424c4efa8
+GET {{hostname}}/api/posts/{{post_id}}
+content-type: application/json
+x-auth-token: {{authToken}}
+###
+
+### Add like to post
+PUT {{hostname}}/api/posts/like/{{post_id}}
+content-type: application/json
+x-auth-token: {{authToken}}
+
+###
+
+### Delete like to post
+PUT {{hostname}}/api/posts/unlike/{{post_id}}
+content-type: application/json
+x-auth-token: {{authToken}}
+
+###
+
+### Add new Comment
+POST {{hostname}}/api/posts/comment/{{post_id}}
+content-type: application/json
+x-auth-token: {{authToken}}
+
+{
+    "text": "new comment"
+}
+
+### Delete comment from post
+@comment_id =5dc7ea4115fd5d0d204ec0fd
+DELETE  {{hostname}}/api/comment/{{post_id}}/{{comment_id}}
+content-type: application/json
+x-auth-token: {{authToken}}
+###

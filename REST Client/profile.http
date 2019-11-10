@@ -1,0 +1,126 @@
+@hostname = http://localhost:6000
+@authToken = {{GetToken.response.body.token}}
+### Authenticate user
+# @name GetToken
+POST {{hostname}}/api/auth
+content-type: application/json
+
+{
+	"email": "npden4ik@yandex.ru",
+	"password": "123456"
+}
+
+###
+
+### Get current user profile
+# @name GetProfile
+GET {{hostname}}/api/profile/me
+content-type: application/json
+x-auth-token: {{authToken}}
+
+
+###
+
+### post create or update profiel
+
+# @name PostProfile
+POST {{hostname}}/api/profile
+content-type: application/json
+x-auth-token: {{authToken}}
+
+{ 
+	"company": "Rating",
+	"website": "Rating.kz",
+	"location": "Kazahstan",
+	"bio": "My name is Danil. I from Kazahstan, city is Ust-Kamnegorsk. I work developer in my city.",
+	"status": "Worker",
+	"githubusername": "NpDen4ik@yandex.ru",
+	"skills": "Programmin,Web,Java,JS,Web",
+	"youtube": "none",
+	"facebook": "none",
+	"twitter": "none",
+	"instagramm": "none",
+	"linkedin": "none"
+}
+
+####
+
+
+### Get all Profiels
+
+# @name GetAllProfile
+GET {{hostname}}/api/profile
+content-type: application/json
+x-auth-token: {{authToken}}
+
+####
+
+
+### get profile from user_id
+@user_id = 5db863543943ee1c6cfa3221
+
+#@name GetProfileFromId
+GET {{hostname}}/api/profile/user/{{user_id}}
+content-type: application/json
+
+###
+
+
+### Delete profile with user
+
+#@name DeleteMyProfile
+DELETE {{hostname}}/api/profile
+content-type: application/json
+x-auth-token: {{authToken}}
+
+####
+
+
+### Add new experince to profile
+PUT {{hostname}}/api/profile/experience
+content-type: application/json
+x-auth-token: {{authToken}}
+
+{
+	"title": "Developer",
+	"company": "Rating",
+	"from": "06.11.2019",
+	"location": "Ust-Kamenogorsk",
+	"current": true,
+	"description": "developer"
+}
+
+###
+
+#### Delete experience
+@exp_id = 5dc675bcfe79222a38c9cc2a
+
+DELETE {{hostname}}/api/profile/experience/{{exp_id}}
+content-type: application/json
+x-auth-token: {{authToken}}
+###
+
+
+
+### Add new education to profile
+PUT {{hostname}}/api/profile/education
+content-type: application/json
+x-auth-token: {{authToken}}
+
+{
+	"school": "kafu",
+	"degree": "Associates degree",
+	"fieldofstudy": "Computer tech",
+	"from": "06.11.2017",
+	"to": "1.12.2019",
+	"description": "developer"
+}
+
+
+#### Delete education
+@edu_id = 5dc68d55b5d3d636109d720e
+
+DELETE {{hostname}}/api/profile/education/{{edu_id}}
+content-type: application/json
+x-auth-token: {{authToken}}
+###
